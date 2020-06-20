@@ -45,7 +45,7 @@ CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
  if [ -d "$DIR" ]; then
   echo ""
  else
-   mkdir -r /jenkins/apache/html
+   mkdir -p /jenkins/apache/html
  fi
  cd /jenkins/apache/html
  touch index.html

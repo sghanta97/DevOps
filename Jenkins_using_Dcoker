@@ -1,0 +1,11 @@
+cd /jenkins/apache
+docker build . -t sandeep_jenkins
+DIR="/jenkins/data"
+if [ -d "$DIR" ]; then
+ echo ""
+else
+ mkdir -p /jenkins/data
+ chown -R 1000:1000 /jenkins/data
+fi
+
+docker run --name=sandeep-jenkins -d -v /jenkins/data:/var/jenkins_home -p 9000:8080 -p 50000:50000 sandeep_jenkins

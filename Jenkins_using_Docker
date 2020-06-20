@@ -1,4 +1,3 @@
-cd /jenkins/apache
 docker build . -t sandeep_jenkins
 DIR="/jenkins/data"
 if [ -d "$DIR" ]; then

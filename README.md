@@ -9,3 +9,5 @@
 ############ Continuous integration with Jenkins.pdf :: - Procedure to build jenkins job with JUNIT testing ####################
 
 ############https://github.com/iamdevopstrainer/DevOpsClassCodes.git###########################################
+
+############# https://dzone.com/articles/dockerizing-jenkins-2-setup-and-using-it-along-wit  #######################  Pipe Line ###############

@@ -11,3 +11,4 @@
 ############https://github.com/iamdevopstrainer/DevOpsClassCodes.git###########################################
 
 ############# https://dzone.com/articles/dockerizing-jenkins-2-setup-and-using-it-along-wit  #######################  Pipe Line ###############
+#############  https://dzone.com/articles/putting-jenkins-build-logs-into-elk-stack-filebeat #######################  ELK Jenkins logs ########

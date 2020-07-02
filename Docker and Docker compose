@@ -1,0 +1,17 @@
+Task 1 -> provisioning 2 AWS instances ( master and worker ) t2 medium
+Task 2-> yum update -y
+Task 3-> install utilities , java, wget, openssl
+          yum install java-1.8.0-openjdk wget openssl telnet yum-utils -y
+		 verify: java -version
+Task 4-> installing docker CE
+          sudo curl  https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
+          dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+          sudo yum makecache 
+          sudo dnf -y  install docker-ce --nobest
+          sudo systemctl enable --now docker
+          systemctl status  docker
+          sudo usermod -aG docker ec2-user
+		verify: docker --version
+Task 5-> Installing docker-compose
+          curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose
+          sudo mv docker-compose /usr/local/bin && sudo chmod +x /usr/local/bin/docker-compose

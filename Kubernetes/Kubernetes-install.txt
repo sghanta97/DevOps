@@ -1,10 +1,10 @@
 
 Prerequisite: complete docker installation
-
 Task 1 -> etc/host entries
-172.31.77.237 kmaster
-172.31.79.57 kworker
-( add these in both worker and master)
+hostnamectl set-hostname 'k8s-master'
+172.31.77.237 k8s-master
+172.31.79.57  k8s-worker
+(on worker and master)
 
 Task 2-> Disabling SE linux
 setenforce 0
@@ -31,7 +31,8 @@ Task 5-> Install Kubernetese
 sudo yum install -y kubelet kubeadm kubectl
 
 Task 6-> create kubernetese cluster on master
-kubeadm init --apiserver-advertise-address=172.31.77.237 --pod-network-cidr 192.168.0.0/16 
+kubeadm init --ignore-preflight-errors=all  --apiserver-advertise-address=172.31.77.237 --pod-network-cidr 192.168.0.0/16 
+
 
 
 output: 

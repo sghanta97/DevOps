@@ -6,7 +6,7 @@ Create a swarm
 
 1.Open a terminal and ssh into the machine where you want to run your manager node. This tutorial uses a machine named manager1
 
-docker-machine ssh manager1
+dockermachine ssh manager1
 
 2.Run the following command to create a new swarm
 

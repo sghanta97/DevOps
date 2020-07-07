@@ -1,0 +1,55 @@
+yum update -y
+yum install xfsprogs -y
+yum install lvm2 -y
+yum install wget curl openssl -y
+pvcreate /dev/xvdb /dev/xvdb
+vgcreate VolGroup01 /dev/xvdb
+lvcreate -L 9G -n jenkinsvol VolGroup01
+lvcreate -L 9G -n nginxvol  VolGroup01
+mkfs -t xfs  /dev/mapper/VolGroup01-jenkinsvol
+mkfs -t xfs  /dev/mapper/VolGroup01-nginxvol
+mkdir -p /jenkins
+mkdir -p /nginx
+echo '/dev/mapper/VolGroup01-jenkinsvol     /jenkins        xfs    defaults 0 0'>> /etc/fstab
+echo '/dev/mapper/VolGroup01-nginxvol       /nginx          xfs    defaults 0 0'>> /etc/fstab
+mount -a
+yum install java-1.8.0-openjdk -y
+dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+yum makecache
+dnf -y  install docker-ce --nobest
+sudo usermod -aG docker ec2-user
+systemctl enable --now docker
+systemctl status  docker
+cd /etc/yum.repos.d/
+rm -rf  docker-ce.repo
+sudo usermod -aG docker ec2-user
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Dockerfile
+
+FROM centos:latest
+MAINTAINER sghanta97@gmail.com
+RUN yum install httpd -y
+RUN echo "Hello welcome to Hyderabad" > /var/www/html/index.html
+EXPOSE 80
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
+
+
+
+
+ docker build . -t sandeep_apache
+ sleep 60
+ DIR="/jenkins/apache/html"
+ if [ -d "$DIR" ]; then
+  echo ""
+ else
+   mkdir -p /jenkins/apache/html
+ fi
+ cd /jenkins/apache/html
+ touch index.html
+ echo "My name is Sandeep" > index.html
+ docker run --name=sandeep-apache1 -d -v /jenkins/apache/html:/var/www/html -p 8001:80 sandeep_apache:latest
+
+

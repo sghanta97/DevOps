@@ -1,0 +1,101 @@
++++++++++++++++
+
+Create a swarm
+
++++++++++++++++
+
+1.Open a terminal and ssh into the machine where you want to run your manager node. This tutorial uses a machine named manager1
+
+docker-machine ssh manager1
+
+2.Run the following command to create a new swarm
+
+docker swarm init --advertise-addr <MANAGER-IP>
+
+Swarm initialized: current node (dxn1zf6l61qsb1josjja83ngz) is now a manager
+
+To add a worker to this swarm, run the following
+
+docker swarm join \
+
+    --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c \
+
+    192.168.99.100:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions
+
+The --advertise-addr flag configures the manager node to publish its address as 192.168.99.100.
+
+The other nodes in the swarm must be able to access the manager at the IP address.
+
+The output includes the commands to join new nodes to the swarm.
+
+Nodes will join as managers or workers depending on the value for the --token flag
+
+3.Run docker info to view the current state of the swarm
+
+docker info
+
+4.Run the docker node ls command to view information about nodes:
+
+docker node ls
+
++++++++++++++++++++++
+
+Import docker images
+
++++++++++++++++++++++
+
+docker import op-ignite.tar op-ignite:v1
+
+docker import portainer.tar  portainer:v1
+
+docker images
+
+++++++++++++++++++++++++++++++
+
+Deploy a service to the swarm
+
+++++++++++++++++++++++++++++++
+
+docker service create  --network=host --name op-ignite -p 9000:9000 --mode global --replicas 4  op-ignite
+
+docker ps -a
+
+docker service ls
+
+docker network ls
+
+docker service ps op-ignite
+
+docker service scale op-ignite=5
+
+docker service ps op-ignite
+
+docker service scale op-ignite=4
+
+docker service ps op-ignite
+
+docker node update --availability drain manager-1
+
+docker node update --availability active manager-1
+
+++++++++++++++++++++++++++++
+
+Import docker updated images
+
+++++++++++++++++++++++++++++
+
+docker import op-ignite.tar op-ignite:v2
+
+docker import portainer.tar  portainer:v2
+
+docker images
+
+++++++++++++++++++++++++++++
+
+Service update to the swarm
+
+++++++++++++++++++++++++++++
+
+docker service update op-ignite:v2  op-ignite

@@ -1,0 +1,29 @@
+=================================================================================================
+https://www.digitalocean.com/community/tutorials/webinar-series-getting-started-with-containers
+=================================================================================================
+
+docker run -d -p 5000:5000 --restart=always --name registry -v $PWD/registry:/var/lib/registry registry
+
+We can now tag a local image and push it to the private registry. Let’s first pull the busybox container from Docker Hub and tag it.
+docker pull busybox
+docker tag busybox localhost:5000/busybox
+docker images
+The previous command confirms that the busybox container is now tagged with localhost:5000, so push the image to the private registry.
+
+docker push localhost:5000/busybox
+
+With the image pushed to the local registry, let’s try removing it from the environment and pulling it back from the registry.
+
+docker rmi -f localhost:5000/busybox
+docker images
+docker pull localhost:5000/busybox
+docker images
+We went through the full circle of pulling the image, tagging it, pushing it to the local registry, and, finally, pulling it back.
+There may be instances where you would want to run the private registry in a dedicated host. Docker Engine running in different machines will talk to the remote registry to pull and push images.
+Since the registry is not secured, we need to modify the configuration of Docker Engine to enable access to an insecure registry. To do this, edit the daemon.json file located at /etc/docker/daemon.json. Create the file if it doesn’t exist.
+Add the following entry:
+Editing /etc/docker/daemon.json
+{
+  "insecure-registries" : ["REMOTE_REGISTRY_HOST:5000"]
+}
+Replace REMOTE_REGISTRY_HOST with the hostname or IP address of the remote registry. Restart Docker Engine to ensure that the configuration changes are applied.

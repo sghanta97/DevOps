@@ -1,0 +1,6 @@
+docker stop web
+docker commit web doweb
+docker login
+docker tag doweb:latest yarlagadda1/doweb
+docker push  yarlagadda1/doweb
+=========================================

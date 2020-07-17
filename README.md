@@ -8,3 +8,4 @@
 ############# https://dzone.com/articles/dockerizing-jenkins-2-setup-and-using-it-along-wit  #######################  Pipe Line ###############
 #############  https://dzone.com/articles/putting-jenkins-build-logs-into-elk-stack-filebeat #######################  ELK Jenkins logs ########
 ############# https://www.youtube.com/watch?v=8D46Pgbz0gg&list=PLxzKY3wu0_FJdJd3IKdiM4Om1hGo2Hsdt ################  Valaxy ####################
+#############https://github.com/miztiik/DevOps-Demos############# AWS Valaxy ##################################################################

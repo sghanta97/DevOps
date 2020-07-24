@@ -1,1 +1,24 @@
+Project1 for practice:
 
+******************************************************************************************
+Jenkins Build-Test-Deploy Java Project(Jenkins - Enable Testing on Jenkins using findbugs)
+******************************************************************************************
+ 1) Provision Two AWS EC2 instances
+ 2) Instll Jenkins in 1st EC2
+ 3) Install Tomcat version 8.x in 2nd EC2
+ 4) Install and configure JDK, Maven, Git in Jenkins
+ 5) Install Jenkins plugins checkstyle, findbugs, pmd  (alternate: Sonar Qube)  ::- Unit testing (Static Analysis, Code Quality)
+ 6) fork the git hub repostiory https://github.com/ravdy/petclinic.git
+ 7) build mvn clean package
+ 8) Study the differences between unstable, stable, success and fail jenkins job statuses
+ 9) build mvn clean,package and checkstyle:checkstyle findbugs:findbugs
+ 10) sett the threshholds  a) Helaththreshholds b) Health Priority c) Status thresholds
+ 11) Modify the jenkins project with post-build action to deploy the petclinic war file.
+ 12) Access the PetClinic war file.
+ 13) Modify the code and re-deploy the war file
+ 14) Observe the changes in Petclinic application
+ 15) Finally Build, Test & Deploy using Jenkins file.
+ *********************************************************************************************
+ Note:-  msbuild, mstest and unit are equivalent plugins for dot net application Unit Testing.
+         Codecoverage is another plugin for Java Aplication.
+ *********************************************************************************************

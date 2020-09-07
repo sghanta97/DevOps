@@ -1,0 +1,23 @@
+# Ansible installation on RHEL8/Centos8
+* sudo dnf update -y
+* sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+* sudo dnf install ansible
+--------------------------------------------------------------------------------------------------
+# Ansible Configuration
+-	Create same user on both server and host  [ sandeep , 1234]
+  * sudo useradd sandeep  
+  * sudo passwd sandeep  
+- Enable Password Authentication  
+  * sudo vi /etc/ssh/sshd_config  --> change:  PasswordAuthentication yes  
+- Enable root access to the user  
+  * sudo vi /etc/sudoers --> sandeep  ALL=(ALL)  ALL  
+- Restart sshd  
+  * systemctl restart sshd  
+- Create keypair with the user
+  * sudo su - sandeep
+  * ssh-keygen
+- copy key to remote server
+  * ssh-copy-id <user>@<ip> 
+-------------------------
+-	Verfication
+  *	Ansible -m ping webservers
